@@ -1,5 +1,8 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'rubygems'
 require 'bundler/setup'
+require 'rack'
 require 'rack/encoding_guard'
 require 'rspec'
 require 'pry-byebug'

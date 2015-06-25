@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'rack'
 gem 'activesupport', '>= 3.0.0'
 
 # Add dependencies to develop your gem here.

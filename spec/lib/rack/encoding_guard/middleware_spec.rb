@@ -40,4 +40,8 @@ describe Rack::EncodingGuard::Middleware do
       end
     end
   end
+
+  describe '#call' do
+    pending
+  end
 end

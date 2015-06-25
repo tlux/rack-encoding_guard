@@ -1,4 +1,4 @@
-require 'active_support/all'
+require 'active_support/inflector'
 
 module Rack
   module EncodingGuard
