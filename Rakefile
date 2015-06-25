@@ -14,38 +14,19 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "rack-encoding_guard"
-  gem.homepage = "http://github.com/tlux/rack-encoding_guard"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "tobias.casper@gmail.com"
-  gem.authors = ["Tobias Casper"]
+  gem.name = 'rack-encoding_guard'
+  gem.homepage = 'http://github.com/tlux/rack-encoding_guard'
+  gem.license = 'MIT'
+  gem.summary = %Q{A middleware to process wrong encoded URLs in Rack applications.}
+  gem.description = gem.summary
+  gem.email = 'tobias.casper@gmail.com'
+  gem.authors = ['Tobias Casper']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-desc "Code coverage detail"
-task :simplecov do
-  ENV['COVERAGE'] = "true"
-  Rake::Task['test'].execute
-end
-
-task :default => :test
-
-require 'rdoc/task'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "rack-encoding_guard #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+require 'yard'
+YARD::Rake::YardocTask.new do |t|
+  t.files   = ['lib/**/*.rb']
+  t.stats_options = ['--list-undoc']
 end
