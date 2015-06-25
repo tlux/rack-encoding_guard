@@ -20,6 +20,7 @@ module Rack
         case strategy
         when nil then RejectStrategy
         when Class then strategy
+        when String then strategy.constantize
         when Symbol
           EncodingGuard.const_get("#{strategy.to_s.camelize}Strategy")
         else fail ArgumentError, "Unknown strategy: #{strategy.inspect}"
