@@ -1,3 +1,5 @@
+require 'active_support/all'
+
 module Rack
   module EncodingGuard
   end
