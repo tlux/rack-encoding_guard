@@ -1,4 +1,7 @@
 # Rack::EncodingGuard
+
+[![Code Climate](https://codeclimate.com/github/tlux/rack-encoding_guard/badges/gpa.svg)](https://codeclimate.com/github/tlux/rack-encoding_guard)
+
 A middleware to process wrong encoded URLs in Rack applications.
 
 ## Contributing to Rack::EncodingGuard
