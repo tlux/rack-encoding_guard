@@ -1,24 +1,26 @@
 module Rack
   module EncodingGuard
     class Strategy
-      def self.resolve(strategy)
-        case strategy
-        when nil then RejectStrategy
-        when Symbol
-          EncodingGuard.const_get("#{strategy.to_s.camelize}Strategy")
-        else strategy.to_s.constantize
-        end
+      PROCESSIBLE_KEYS = %w(
+        HTTP_REFERER
+        PATH_INFO
+        REQUEST_URI
+        REQUEST_PATH
+        QUERY_STRING
+      )
+
+      def self.process(env)
+        new(env).process
       end
 
-      attr_reader :app
+      attr_reader :env
 
-      def initialize(app)
-        @app = app
+      def initialize(env)
+        @env = env
       end
 
-      def call(env)
-        fail NotImplementedError,
-             'Override #call in your strategy implementation'
+      def process
+        yield
       end
     end
   end
