@@ -1,12 +1,18 @@
 module Rack
   module EncodingGuard
     class RejectStrategy < Strategy
+      DEFAULT_RESPONSE = 'Bad Request'
+
       def process
         return bad_request_response unless valid_request?
         yield
       end
 
       private
+
+      def message
+        options.fetch(:with, DEFAULT_RESPONSE) 
+      end
 
       def valid_request?
         Strategy::PROCESSIBLE_KEYS.all? do |key|
@@ -16,7 +22,7 @@ module Rack
       end
 
       def bad_request_response
-        [400, {}, ['Bad Request']]
+        [400, {}, [message]]
       end
     end
   end

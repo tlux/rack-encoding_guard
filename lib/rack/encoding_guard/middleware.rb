@@ -1,15 +1,16 @@
 module Rack
   module EncodingGuard
     class Middleware
-      attr_reader :app, :strategy
+      attr_reader :app, :strategy, :options
 
-      def initialize(app, strategy = nil)
+      def initialize(app, strategy = nil, options = {})
         @app = app
         @strategy = resolve_strategy_class(strategy)
+        @options = options
       end
 
       def call(env)
-        strategy.process(env) do
+        strategy.new(env, options).process do
           app.call(env)
         end
       end
@@ -22,8 +23,10 @@ module Rack
         when Class then strategy
         when String then strategy.constantize
         when Symbol
-          EncodingGuard.const_get("#{strategy.to_s.camelize}Strategy")
-        else fail ArgumentError, "Unknown strategy: #{strategy.inspect}"
+          class_name = "#{strategy.to_s.camelize}Strategy"
+          EncodingGuard.const_get(class_name)
+        else
+          fail ArgumentError, "Invalid strategy: #{strategy.inspect}"
         end
       end
     end

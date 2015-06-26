@@ -38,6 +38,12 @@ describe Rack::EncodingGuard::Middleware do
         middleware = described_class.new(app, 'Rack::EncodingGuard::SanitizeStrategy')
         expect(middleware.strategy).to eq Rack::EncodingGuard::SanitizeStrategy
       end
+
+      it 'raises if an object of invalid type is specified as second argument' do
+        expect { described_class.new(app, 0) }.to raise_error(
+          ArgumentError, "Invalid strategy: 0"
+        )
+      end
     end
   end
 

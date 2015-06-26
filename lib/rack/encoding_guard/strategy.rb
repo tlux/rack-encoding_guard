@@ -9,14 +9,11 @@ module Rack
         QUERY_STRING
       )
 
-      def self.process(env)
-        new(env).process
-      end
+      attr_reader :env, :options
 
-      attr_reader :env
-
-      def initialize(env)
+      def initialize(env, options = {})
         @env = env
+        @options = {}
       end
 
       def process
