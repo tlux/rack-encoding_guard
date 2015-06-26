@@ -1,7 +1,7 @@
 module Rack
   module EncodingGuard
     class RejectStrategy < Strategy
-      DEFAULT_RESPONSE = 'Bad Request'
+      DEFAULT_MESSAGE = 'Bad Request'
 
       def process
         return bad_request_response unless valid_request?
@@ -11,7 +11,7 @@ module Rack
       private
 
       def message
-        options.fetch(:with, DEFAULT_RESPONSE) 
+        options.fetch(:with, DEFAULT_MESSAGE) 
       end
 
       def valid_request?
