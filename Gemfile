@@ -13,5 +13,5 @@ group :development do
   gem 'jeweler', '~> 2.0.1'
   gem 'yard'
   gem 'rubocop', require: false
-  gem 'codeclimate-test-reporter', group: :test, require: nil
+  gem 'codeclimate-test-reporter', require: nil
 end
