@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Tobias Casper"]
-  s.date = "2015-06-25"
+  s.date = "2015-06-27"
   s.description = "A middleware to process wrong encoded URLs in Rack applications."
   s.email = "tobias.casper@gmail.com"
   s.extra_rdoc_files = [
@@ -20,9 +20,11 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
+    "README.md",
     "Rakefile",
     "VERSION",
     "lib/rack-encoding_guard.rb",
@@ -31,6 +33,7 @@ Gem::Specification.new do |s|
     "lib/rack/encoding_guard/reject_strategy.rb",
     "lib/rack/encoding_guard/sanitize_strategy.rb",
     "lib/rack/encoding_guard/strategy.rb",
+    "rack-encoding_guard.gemspec",
     "spec/lib/rack/encoding_guard/middleware_spec.rb",
     "spec/lib/rack/encoding_guard/reject_strategy_spec.rb",
     "spec/lib/rack/encoding_guard/sanitize_strategy_spec.rb",
@@ -51,30 +54,30 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rack>, [">= 0"])
       s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
-      s.add_development_dependency(%q<pry-byebug>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 2.0.1"])
       s.add_development_dependency(%q<yard>, [">= 0"])
       s.add_development_dependency(%q<rubocop>, [">= 0"])
+      s.add_development_dependency(%q<codeclimate-test-reporter>, [">= 0"])
     else
       s.add_dependency(%q<rack>, [">= 0"])
       s.add_dependency(%q<activesupport>, [">= 3.0.0"])
       s.add_dependency(%q<rspec>, [">= 0"])
-      s.add_dependency(%q<pry-byebug>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0"])
       s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
       s.add_dependency(%q<yard>, [">= 0"])
       s.add_dependency(%q<rubocop>, [">= 0"])
+      s.add_dependency(%q<codeclimate-test-reporter>, [">= 0"])
     end
   else
     s.add_dependency(%q<rack>, [">= 0"])
     s.add_dependency(%q<activesupport>, [">= 3.0.0"])
     s.add_dependency(%q<rspec>, [">= 0"])
-    s.add_dependency(%q<pry-byebug>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0"])
     s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
     s.add_dependency(%q<yard>, [">= 0"])
     s.add_dependency(%q<rubocop>, [">= 0"])
+    s.add_dependency(%q<codeclimate-test-reporter>, [">= 0"])
   end
 end
 
