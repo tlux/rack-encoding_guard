@@ -8,7 +8,6 @@ require 'bundler/setup'
 require 'rack'
 require 'rack/encoding_guard'
 require 'rspec'
-require 'pry-byebug'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
