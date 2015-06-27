@@ -13,14 +13,14 @@ describe Rack::EncodingGuard::Middleware do
     end
 
     context 'with strategies' do
-      it 'uses RejectStrategy when second argument is omitted' do
+      it 'uses SanitizeStrategy when second argument is omitted' do
         middleware = described_class.new(app)
-        expect(middleware.strategy).to be_a Rack::EncodingGuard::RejectStrategy
+        expect(middleware.strategy).to be_a Rack::EncodingGuard::SanitizeStrategy
       end
 
-      it 'uses RejectStrategy when second argument is nil' do
+      it 'uses SanitizeStrategy when second argument is nil' do
         middleware = described_class.new(app, nil)
-        expect(middleware.strategy).to be_a Rack::EncodingGuard::RejectStrategy
+        expect(middleware.strategy).to be_a Rack::EncodingGuard::SanitizeStrategy
       end
 
       it 'uses RejectStrategy when second argument is :reject' do

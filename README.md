@@ -27,28 +27,36 @@ If you are on Rails, you can insert the middleware to your application.rb
 config.middleware.use 'Rack::EncodingGuard::Middleware'
 ```
 
-### Reject Strategy
-By default, all requests containing characters with invalid encodings are rejected with a HTTP status 400 code ("Bad Request"). Additionally, you can configure which message will be shown to the requesting user in this case:
-```ruby
-config.middleware.use 'Rack::EncodingGuard::Middleware', :reject, with: 'Check that URL, mate!'
-```
-
 ### Sanitize Strategy
-When using the sanitize strategy it is also possible to allow requests containing invalid characters. All invalid characters will be stripped out of all relevant ENV vars so no encoding errors will occur down the middleware stack.
+This is the default strategy. When using it sanitization, all invalid characters
+will be stripped out of all relevant ENV vars. Subsequently, no encoding errors
+will occur down the middleware stack.
 ```ruby
 config.middleware.use 'Rack::EncodingGuard::Middleware', :sanitize
 ```
 
+### Reject Strategy
+When using this strategy, all requests containing invalid characters are
+rejected with a HTTP status 400 code ("Bad Request"). Additionally, you can
+configure which hint will be displayed to the requesting user:
+```ruby
+config.middleware.use 'Rack::EncodingGuard::Middleware', :reject, with: 'Check that URL, mate!'
+```
+
 ## Contributing to Rack::EncodingGuard
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
+* Check out the latest master to make sure the feature hasn't been implemented
+  or the bug hasn't been fixed yet.
+* Check out the issue tracker to make sure someone already hasn't requested it
+  and/or contributed it.
 * Fork the project.
 * Start a feature/bugfix branch.
 * Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+* Make sure to add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to
+  have your own version, or is otherwise necessary, that is fine, but please
+  isolate to its own commit so I can cherry-pick around it.
 
 ## Copyright
-Copyright (c) 2015 Tobias Casper. See LICENSE.txt for
-further details.
+Copyright (c) 2015 Tobias Casper. See LICENSE.txt for further details.
 

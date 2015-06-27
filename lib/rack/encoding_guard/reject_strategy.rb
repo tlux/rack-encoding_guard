@@ -16,7 +16,7 @@ module Rack
 
       def invalid_request?(env)
         Strategy::PROCESSIBLE_KEYS.any? do |key|
-          !env[key].to_s.valid_encoding?
+          !env[key].to_s.dup.force_encoding(Encoding::UTF_8).valid_encoding?
         end
       end
 

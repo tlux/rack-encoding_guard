@@ -18,7 +18,7 @@ module Rack
 
       def resolve_strategy_object(strategy, options)
         case strategy
-        when nil then RejectStrategy.new(options)
+        when nil then SanitizeStrategy.new(options)
         when Class then strategy.new(options)
         when String then strategy.constantize.new(options)
         when Symbol
