@@ -58,7 +58,9 @@ describe Rack::EncodingGuard::Middleware do
 
       it 'uses any object responding to #process as strategy' do
         strategy = double
-        allow(strategy).to receive(:process).and_return('Strategy Result')
+        allow(strategy).to receive(:process) do |_env|
+          [200, {}, ['Strategy Response']]
+        end
 
         middleware = described_class.new(app, strategy)
         expect(middleware.strategy).to eq strategy
@@ -74,12 +76,13 @@ describe Rack::EncodingGuard::Middleware do
   end
 
   describe '#call' do
-    it 'returns the result of the process method of the used strategy' do
+    it 'returns the result of the #process method of the used strategy' do
       strategy = double('Strategy')
-      allow(strategy).to receive(:process).and_return('Strategy Result')
+      strategy_response = [200, {}, ['Strategy Response']]
+      allow(strategy).to receive(:process).and_return(strategy_response)
 
       middleware = described_class.new(app, strategy)
-      expect(middleware.call({})).to eq 'Strategy Result'
+      expect(middleware.call({})).to eq strategy_response
     end
   end
 end

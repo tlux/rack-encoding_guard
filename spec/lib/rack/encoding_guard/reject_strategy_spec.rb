@@ -20,8 +20,8 @@ describe Rack::EncodingGuard::RejectStrategy do
 
   INVALID_ENV_VARS = {
     'HTTP_REFERER' => "http://example.com/so\255me/ref\255erer/path",
-    'PATH_INFO' => "/some/pa\255th",
-    'REQUEST_URI' => "/so\255me/request/path?a\255nd=query",
+    'PATH_INFO'    => "/some/pa\255th",
+    'REQUEST_URI'  => "/so\255me/request/path?a\255nd=query",
     'REQUEST_PATH' => "/some/pa\255th",
     'QUERY_STRING' => "and=que\255ry&str\255ing=set"
   }
