@@ -1,32 +1,34 @@
 module Rack
   module EncodingGuard
     class Middleware
-      attr_reader :app, :strategy, :options
+      attr_reader :app, :strategy
 
       def initialize(app, strategy = nil, options = {})
         @app = app
-        @strategy = resolve_strategy_class(strategy)
-        @options = options
+        @strategy = resolve_strategy_object(strategy, options)
       end
 
       def call(env)
-        strategy.new(env, options).process do
+        strategy.process(env) do
           app.call(env)
         end
       end
 
       private
 
-      def resolve_strategy_class(strategy)
+      def resolve_strategy_object(strategy, options)
         case strategy
-        when nil then RejectStrategy
-        when Class then strategy
-        when String then strategy.constantize
+        when nil then RejectStrategy.new(options)
+        when Class then strategy.new(options)
+        when String then strategy.constantize.new(options)
         when Symbol
           class_name = "#{strategy.to_s.camelize}Strategy"
-          EncodingGuard.const_get(class_name)
+          EncodingGuard.const_get(class_name).new(options)
         else
-          fail ArgumentError, "Invalid strategy: #{strategy.inspect}"
+          unless strategy.respond_to?(:process)
+            fail ArgumentError, "Invalid strategy: #{strategy.inspect}"
+          end
+          strategy
         end
       end
     end

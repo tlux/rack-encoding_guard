@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Rack::EncodingGuard::SanitizeStrategy do
   include_examples 'Strategy'
 
-  let! :rack_env do
+  let! :env do
     Rack::MockRequest.env_for('http://example.com/some/path?and=query')
   end
 
@@ -13,7 +13,7 @@ describe Rack::EncodingGuard::SanitizeStrategy do
 
   context 'with invalid HTTP_REFERER' do
     before do
-      rack_env['HTTP_REFERER'] = "http://example.com/so\255me/ref\255erer/path"
+      env['HTTP_REFERER'] = "http://example.com/so\255me/ref\255erer/path"
     end
 
     pending
@@ -21,7 +21,7 @@ describe Rack::EncodingGuard::SanitizeStrategy do
 
   context 'with invalid PATH_INFO' do
     before do
-      rack_env['PATH_INFO'] = "/some/pa\255th"
+      env['PATH_INFO'] = "/some/pa\255th"
     end
 
     pending
@@ -29,7 +29,7 @@ describe Rack::EncodingGuard::SanitizeStrategy do
 
   context 'with invalid REQUEST_URI' do
     before do
-      rack_env['REQUEST_URI'] = "/so\255me/request/path?a\255nd=query"
+      env['REQUEST_URI'] = "/so\255me/request/path?a\255nd=query"
     end
 
     pending
@@ -37,7 +37,7 @@ describe Rack::EncodingGuard::SanitizeStrategy do
 
   context 'with invalid REQUEST_PATH' do
     before do
-      rack_env['PATH_INFO'] = "/some/pa\255th"
+      env['PATH_INFO'] = "/some/pa\255th"
     end
 
     pending
@@ -45,7 +45,7 @@ describe Rack::EncodingGuard::SanitizeStrategy do
 
   context 'with invalid QUERY_STRING' do
     before do
-      rack_env['QUERY_STRING'] = "and=que\255ry&str\255ing=set"
+      env['QUERY_STRING'] = "and=que\255ry&str\255ing=set"
     end
 
     pending
