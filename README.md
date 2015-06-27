@@ -4,8 +4,43 @@
 
 A middleware to process wrong encoded URLs in Rack applications.
 
+## Requirements
+Rack::EncodingGuard has been tested in following environments:
+* Ruby 1.9.3
+* Ruby 2.0
+* Ruby 2.1
+* Ruby 2.2
+* JRuby
+* Rubinius 2
+
+## Setup
+`gem install rack-encoding_guard`
+
+Alternatively, add the following line to your Gemfile when using Bundler:
+```ruby
+gem 'rack-encoding_guard', '~> 0.1'
+```
+
+## Usage
+If you are on Rails, you can insert the middleware to your application.rb
+```ruby
+config.middleware.use 'Rack::EncodingGuard::Middleware'
+```
+
+### Reject Strategy
+By default, all requests containing characters with invalid encodings are rejected with a HTTP status 400 code ("Bad Request"). Additionally, you can configure which message will be shown to the requesting user in this case:
+```ruby
+config.middleware.use 'Rack::EncodingGuard::Middleware', :reject, with: 'Check that URL, mate!'
+```
+
+### Sanitize Strategy
+When using the sanitize strategy it is also possible to allow requests containing invalid characters. All invalid characters will be stripped out of all relevant ENV vars so no encoding errors will occur down the middleware stack.
+```ruby
+config.middleware.use 'Rack::EncodingGuard::Middleware', :sanitize
+```
+
 ## Contributing to Rack::EncodingGuard
- * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
 * Start a feature/bugfix branch.
