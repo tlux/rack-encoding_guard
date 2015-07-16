@@ -43,6 +43,12 @@ override which message will be displayed to the requesting user:
 config.middleware.use 'Rack::EncodingGuard::Middleware', :reject, with: 'Check that URL, mate!'
 ```
 
+### Testing
+You can test the result of the different strategies with the following bash command:
+```bash
+curl "localhost:3000/?test=�S��7�砱�y�����g�d��C���|��W��O�s��~����*6��@�4�&�A�J����"
+```
+
 ## Contributing to Rack::EncodingGuard
 * Check out the latest master to make sure the feature hasn't been implemented
   or the bug hasn't been fixed yet.
